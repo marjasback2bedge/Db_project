@@ -1,1 +1,1 @@
-# this if the reference project dir
+# this is the reference project dir
