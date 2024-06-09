@@ -5,30 +5,32 @@ Use project;
 source project_DDL.sql;
 */
 
+SET time_zone = "+00:00";
+
 /*用戶*/
 create table user (
-  ID varchar(5), 
+  ID BIGINT(30) NOT NULL AUTO_INCREMENT, 
 	type varchar(1) not null, /*管理員0，使用者1*/
 	name varchar(20), 
   contact varchar(100),
 	primary key (ID)
-) ENGINE=INNODB;
+) ENGINE=INNODB AUTO_INCREMENT=1;
                                                                                      
 /* 貼文*/
 create table post (
-    ID varchar(5),
+    ID BIGINT(30) NOT NULL AUTO_INCREMENT,
     type varchar(1) not null, /* 失物0，招領1*/
-    userID varchar(5), /* foreign key用戶ID*/
+    userID BIGINT(30), /* foreign key用戶ID*/
     occurtime datetime, /* 物品發現/遺失時間 datetime:YYYY-MM-DD HH:MM:SS*/
-    posttime datetime, /* 發布時間*/
+    posttime datetime NOT NULL DEFAULT current_timestamp(), /* 發布時間*/
     primary key (ID),
     foreign key (userID) references user(ID) on delete cascade
-) ENGINE=INNODB;
+) ENGINE=INNODB AUTO_INCREMENT=1;
 
 /* 物品*/
 create table item (
-    ID varchar(5),
-    postID varchar(5), /* foreign key貼文ID*/
+    ID BIGINT(30) NOT NULL AUTO_INCREMENT,
+    postID BIGINT(30), /* foreign key貼文ID*/
     state varchar(1) not null, /* 尋找中0 待領取1 已解決2*/
     name varchar(50),
     kind varchar(50),
@@ -36,32 +38,32 @@ create table item (
     photo blob, 
     primary key (ID),
     foreign key (postID) references post(ID) on delete cascade
-) ENGINE=INNODB;
+) ENGINE=INNODB AUTO_INCREMENT=1;
 
 /* 場所*/
 create table department (
-    ID varchar(5),
+    ID BIGINT(30) NOT NULL AUTO_INCREMENT,
     name varchar(100),
     campus text,
     building text,
     primary key (ID)
-) ENGINE=INNODB;
+) ENGINE=INNODB AUTO_INCREMENT=1;
 
 /* 通知*/
 create table note (
-    ID varchar(5),
-    userID varchar(5), /* foreign key用戶ID*/
+    ID BIGINT(30) NOT NULL AUTO_INCREMENT,
+    userID BIGINT(30), /* foreign key用戶ID*/
     content text,
-    time datetime,
+    time datetime NOT NULL DEFAULT current_timestamp(),
     primary key (ID),
     foreign key (userID) references user(ID) on delete cascade
-) ENGINE=INNODB;
+) ENGINE=INNODB AUTO_INCREMENT=1;
 
 /* 響應*/
 create table response (
-    time datetime,
-    userID varchar(5), /* foreign key用戶ID*/
-    postID varchar(5), /* foreign key貼文ID*/
+    time datetime NOT NULL DEFAULT current_timestamp(),
+    userID BIGINT(30), /* foreign key用戶ID*/
+    postID BIGINT(30), /* foreign key貼文ID*/
     content text,
     primary key (time, userID),
     foreign key (userID) references user(ID),
@@ -71,22 +73,22 @@ create table response (
 
 /* 貼文發生位置*/
 create table postlocate (
-    ID varchar(5),
-    postID varchar(5), /* foreign key貼文ID*/
-    deptID varchar(5), /* foreign key場所ID*/
+    ID BIGINT(30) NOT NULL AUTO_INCREMENT,
+    postID BIGINT(30), /* foreign key貼文ID*/
+    deptID BIGINT(30), /* foreign key場所ID*/
     primary key (ID, postID),
     foreign key (postID) references post(ID),
     foreign key (deptID) references department(ID) 
     on delete set null
-) ENGINE=INNODB;
+) ENGINE=INNODB AUTO_INCREMENT=1;
 
 /* 物品目前位置*/
 create table itemlocate (
-    ID varchar(5),
-    itemID varchar(5), /* foreign key物品ID*/
-    deptID varchar(5), /* foreign key場所ID*/
+    ID BIGINT(30),
+    itemID BIGINT(30), /* foreign key物品ID*/
+    deptID BIGINT(30), /* foreign key場所ID*/
     primary key (ID, itemID),
     foreign key (itemID) references item(ID),
     foreign key (deptID) references department(ID)
     on delete set null
-) ENGINE=INNODB;
+) ENGINE=INNODB AUTO_INCREMENT=1;
