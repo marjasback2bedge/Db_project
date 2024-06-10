@@ -13,6 +13,7 @@ create table user (
 	type varchar(1) not null, /*管理員0，使用者1*/
 	name varchar(20), 
   contact varchar(100),
+  password varchar(20),
 	primary key (ID)
 ) ENGINE=INNODB AUTO_INCREMENT=1;
                                                                                      
