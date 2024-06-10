@@ -24,7 +24,6 @@
 
         <form action="dologin.php" method="post">
             <div class="log_in_box">
-                <input type="hidden" name="serial_no" value="<?php echo $sn; ?>">
                 <br><br>
                 <h2>登入您的帳號</h2>
                 <br>
