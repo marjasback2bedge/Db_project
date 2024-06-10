@@ -19,10 +19,6 @@
         <div>
             <nav class="navbar">
                 <a href="index.php" target="_self" class="return_indexpage_pos">回到首頁</a>
-                <!-- <a href="/page/signup.html" target="_self" class="signup_pos"> SIGN UP</a>
-                <a href="/page/login.html" target="_self" class="login_pos"> LOG IN</a>
-                <a href="/page/search.html" target="_self" class="search_pos">搜尋更多課程評價！</a> -->
-                <!-- <p class="signup_page_title">註冊</p> -->
             </nav>
         </div>
 
