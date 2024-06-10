@@ -10,7 +10,7 @@ SET time_zone = "+00:00";
 /*用戶*/
 create table user (
   ID BIGINT(30) NOT NULL AUTO_INCREMENT, 
-	type varchar(1) not null, /*管理員0，使用者1*/
+	type varchar(1) not null DEFAULT 1, /*管理員0，使用者1*/
 	name varchar(20), 
   contact varchar(100),
   password varchar(20),
