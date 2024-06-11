@@ -78,9 +78,8 @@ create table postlocate (
     postID BIGINT(30), /* foreign key貼文ID*/
     deptID BIGINT(30), /* foreign key場所ID*/
     primary key (ID, postID),
-    foreign key (postID) references post(ID),
-    foreign key (deptID) references department(ID) 
-    on delete set null
+    foreign key (postID) references post(ID) on delete cascade,
+    foreign key (deptID) references department(ID) on delete cascade
 ) ENGINE=INNODB AUTO_INCREMENT=1;
 
 /* 物品目前位置*/
@@ -89,7 +88,6 @@ create table itemlocate (
     itemID BIGINT(30), /* foreign key物品ID*/
     deptID BIGINT(30), /* foreign key場所ID*/
     primary key (ID, itemID),
-    foreign key (itemID) references item(ID),
-    foreign key (deptID) references department(ID)
-    on delete set null
+    foreign key (itemID) references item(ID) on delete cascade,
+    foreign key (deptID) references department(ID) on delete cascade
 ) ENGINE=INNODB AUTO_INCREMENT=1;
