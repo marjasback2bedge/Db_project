@@ -26,6 +26,7 @@ if ($name && $passwd) {
         $_SESSION['name'] = $row['name'];
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['type'] = $row['type'];
+        $_SESSION['contact'] = $row['contact'];
 
         // Check roles
         if ($_SESSION['type'] == 0) {
