@@ -29,7 +29,7 @@ if ($name && $passwd) {
         // Check roles
         if ($_SESSION['type'] == 0) {
             $_SESSION['login'] = TRUE;
-            header('Location: admin.php');
+            header('Location: admin');
         } else {
             $_SESSION['login'] = TRUE;
             
