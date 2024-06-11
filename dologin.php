@@ -23,6 +23,7 @@ if ($name && $passwd) {
     if ($result->num_rows) {
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
+        $_SESSION['name'] = $row['name'];
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['type'] = $row['type'];
 
