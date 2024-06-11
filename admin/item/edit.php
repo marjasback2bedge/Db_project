@@ -5,6 +5,14 @@
         </ul>
     </nav>
 </body>
+
+<style>
+    img {
+        height: auto;
+        width: 100px;
+    }
+</style>
+
 <?php
 include '../../conn.php';
 
@@ -15,6 +23,7 @@ $result = $conn->query($select_sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
+    $defaultimg = base64_encode(file_get_contents(base_url . "admin/img/defaultimg.png"));
     
     echo "<form method='POST' action='doedit.php'>";
     echo "<input type='hidden' name='ID' value='" . $row["ID"] . "'>";
@@ -70,8 +79,20 @@ if ($result->num_rows > 0) {
         echo ">$option</option>";
     }
     echo "</select></td></tr>";
-
     echo "<tr><th colspan='2'><input type='submit' name='edit' value='編輯'/></th></tr>";
+
+    echo "<tr><td></td><td style='display: flex; align-items: center;'>";
+    if($row["photo"] == NULL){
+        echo '<img src="data:image/jpeg;base64,' . $defaultimg . '" />';
+    }
+    else{
+        $imageBase64 = base64_encode($row["photo"]);
+        echo '<img src="data:image/jpeg;base64,' . $imageBase64 . '" />';
+    }
+    echo "<input type='submit' name='removeimg' value='審核'/></th>";
+    echo "</td></tr>";
+
+    
     
     
     echo "</table>";

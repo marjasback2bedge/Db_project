@@ -21,6 +21,8 @@ if ($result->num_rows > 0) {
     echo "<table>";
     echo "<tr><th>ID</th><td><input type='text' name='post ID' value='" . $row["ID"] . "' readonly></td></tr>";
     echo "<tr><th>用戶ID</th><td><a href='../user/edit.php?ID={$row['userID']}'><input type='text' name='user ID' value='" . $row["userID"] . "' readonly></td></a></tr>";
+    echo "<tr><th>發布時間</th><td><input type='text' name='post ID' value='" . date("Y-m-d H:i:s", strtotime($row['posttime'])) . "' readonly></td></tr>";
+    echo "<tr><th>發生時間</th><td><input type='text' name='post ID' value='" . date("Y-m-d H:i:s", strtotime($row['occurtime'])) . "' readonly></td></tr>";
     
     $stateMap = [
         0 => "失物尋找",
@@ -79,3 +81,87 @@ else{
     header('Location: index.php');
 }			
 ?>
+
+<style>
+    img {
+        height: 30px;
+        width: auto;
+    }
+</style>
+<table>
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>ID</th>
+			<th>名稱</th>
+			<th>分類</th>
+			<th>狀態</th>
+			<th>位置</th>
+			<th></th>
+		</tr>
+	</thead>
+	<?php 
+		include '../../conn.php';
+
+		$i = 1;
+		$sqli = "SELECT *
+			FROM item
+            WHERE postID = '$ID';";
+		$resulti = $conn->query($sqli);
+
+		if ($resulti === false) {
+			die("error: " . $conn->error);
+		}
+
+		if ($resulti->num_rows > 0) {
+            $defaultimg = base64_encode(file_get_contents(base_url . "admin/img/defaultimg.png"));
+			while ($rowi = $resulti->fetch_assoc()) {
+				echo "<tr>";
+				echo "<td>" . $i++ . "</td>";
+				echo "<td>" . $rowi['ID'] . "</td>";
+				echo "<td>" . $rowi['name'] . "</td>";
+				echo "<td>" . $rowi['kind'] . "</td>";
+				echo "<td>";
+				if ($rowi['state'] == 0) {
+					echo "尋找中";
+				} 
+				elseif ($rowi['state'] == 1){
+					echo "待領取";
+				}
+				else{
+					echo "已解決";
+				}
+				echo "</td>";
+
+				$sqli2 = "SELECT department.name AS name, item.ID
+				FROM (item INNER JOIN itemlocate ON item.ID = itemlocate.itemID)
+					INNER JOIN department ON department.ID = itemlocate.deptID
+				WHERE item.ID =\"" . $rowi['ID'] . "\";";
+				$resulti2 = $conn->query($sqli2);
+				if ($resulti2->num_rows > 0){
+					$rowi2 = $resulti2->fetch_assoc();
+					echo "<td>" . $rowi2['name'] . "</td>";
+				}
+				else echo "<td></td>";
+
+                echo "<td>";
+                if($rowi["photo"] == NULL){
+                    echo '<img src="data:image/jpeg;base64,' . $defaultimg . '" />';
+                }
+                else{
+                    $imageBase64 = base64_encode($rowi["photo"]);
+                    echo '<img src="data:image/jpeg;base64,' . $imageBase64 . '" />';
+                }
+                echo "</td>";
+
+				echo "<td><a href='" . base_url . "admin/item/edit.php?ID={$rowi['ID']}'>編輯</a></td>";
+				echo "<td><a href='" . base_url . "admin/item/delete.php?ID={$rowi['ID']}'>刪除</a></td>";
+	
+				echo "</tr><br>";
+			}
+		} else {
+			echo "<tr><td colspan='6'>0 results</td></tr>";
+		}
+		$conn->close();
+	?>
+</table>

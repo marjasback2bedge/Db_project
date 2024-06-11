@@ -4,17 +4,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $ID = $_POST['ID'];
 
     if(isset($_POST['edit'])){
-        $category = $_POST['Category'];
-        $name = $_POST['name'];
 
-        $selectedState = $_POST['state'];
+        $selectedState = $_POST['type'];
         $stateMap = [
-            "尋找中" => 0,
-            "待領取" => 1,
-            "已解決" => 2
+            "失物尋找" => 0,
+            "拾獲招領" => 1,
         ];
+
         $state = isset($stateMap[$selectedState]) ? $stateMap[$selectedState] : null;
-        $sql = "UPDATE item SET kind = '$category', name = '$name', state = '$state' WHERE ID = '$ID'";
+        $sql = "UPDATE post SET type = '$state' WHERE ID = '$ID'";
         
         if($conn->query($sql) === TRUE){
             $selectedloc = $_POST['location'];
@@ -29,13 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 if ($result->num_rows > 0){
                     $row = $result->fetch_assoc();
                     $deptID = $row['ID'];
-                    $check_sql = "SELECT * FROM itemlocate WHERE itemID = '$ID';";
+                    $check_sql = "SELECT * FROM postlocate WHERE postID = '$ID';";
                     $check = $conn->query($check_sql);
                     if ($check->num_rows > 0){
-                        $sql2 = "UPDATE itemlocate SET deptID = '$deptID' WHERE itemID = '$ID'";
+                        $sql2 = "UPDATE postlocate SET deptID = '$deptID' WHERE postID = '$ID'";
                     }
                     else{
-                        $sql2 = "INSERT INTO `itemlocate` (`itemID`, `deptID`) VALUES ('$ID', '$deptID');";
+                        $sql2 = "INSERT INTO `postlocate` (`postID`, `deptID`) VALUES ('$ID', '$deptID');";
                     }
                     if ($conn->query($sql2) === TRUE) {
                         echo "Record updated successfully";

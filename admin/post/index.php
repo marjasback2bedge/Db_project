@@ -10,8 +10,10 @@
 	<tr>
 		<th>#</th>
 		<th>ID</th>
-		<th>發布時間</th>
 		<th>用戶名稱</th>
+		<th>發布時間</th>
+		<th>發生時間</th>
+		<th>位置</th>
 		<th>用途</th>
 		<th>物品</th>
 	</tr><br>
@@ -33,8 +35,21 @@
 			echo "<tr>";
 			echo "<td>" . $i++ . "</td>";
 			echo "<td>" . $row['ID'] . "</td>";
-			echo "<td>" . date("Y-m-d H:i:s", strtotime($row['posttime'])) . "</td>";
 			echo "<td>" . $row['name'] . "</td>";
+			echo "<td>" . date("Y-m-d H:i:s", strtotime($row['posttime'])) . "</td>";
+			echo "<td>" . date("Y-m-d H:i:s", strtotime($row['occurtime'])) . "</td>";
+
+			$sql2 = "SELECT department.name AS name, post.ID
+			FROM (post INNER JOIN postlocate ON post.ID = postlocate.postID)
+				INNER JOIN department ON department.ID = postlocate.deptID
+			WHERE post.ID =\"" . $row['ID'] . "\";";
+			$result2 = $conn->query($sql2);
+			if ($result2->num_rows > 0){
+				$row2 = $result2->fetch_assoc();
+				echo "<td>" . $row2['name'] . "</td>";
+			}
+			else echo "<td></td>";
+
 			echo "<td>";
 			if ($row['type'] == 0) {
 				echo "失物尋找";

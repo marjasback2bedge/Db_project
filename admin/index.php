@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../initialize.php';
 require_once('inc/header.php')
 ?>
@@ -31,10 +32,8 @@ require_once('inc/header.php')
         
         <?php 
         include '../conn.php';
-        $sql = "SELECT name FROM user;"; // TODO
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        echo "<span class='d-none d-md-block dropdown-toggle ps-2'>" . $row['name'] . "\t</span>";
+        $name = $_SESSION['name'];
+        echo "<span class='d-none d-md-block dropdown-toggle ps-2'>$name\t</span>";
         ?>
       </a>
       <!-- End Profile Iamge Icon -->

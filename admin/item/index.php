@@ -5,7 +5,12 @@
         </ul>
     </nav>
 </body>
-
+<style>
+    img {
+        height: 30px;
+        width: auto;
+    }
+</style>
 
 <table>
 	<thead>
@@ -34,6 +39,7 @@
 		}
 
 		if ($result->num_rows > 0) {
+			$defaultimg = base64_encode(file_get_contents(base_url . "admin/img/defaultimg.png"));
 			while ($row = $result->fetch_assoc()) {
 				echo "<tr>";
 				echo "<td>" . $i++ . "</td>";
@@ -63,6 +69,16 @@
 					echo "<td>" . $row2['name'] . "</td>";
 				}
 				else echo "<td></td>";
+
+                echo "<td>";
+                if($row["photo"] == NULL){
+                    echo '<img src="data:image/jpeg;base64,' . $defaultimg . '" />';
+                }
+                else{
+                    $imageBase64 = base64_encode($row["photo"]);
+                    echo '<img src="data:image/jpeg;base64,' . $imageBase64 . '" />';
+                }
+                echo "</td>";
 
 				echo "<td><a href='edit.php?ID={$row['ID']}'>編輯</a></td>";
 				echo "<td><a href='delete.php?ID={$row['ID']}'>刪除</a></td>";
