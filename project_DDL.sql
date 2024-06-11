@@ -91,3 +91,5 @@ create table itemlocate (
     foreign key (itemID) references item(ID) on delete cascade,
     foreign key (deptID) references department(ID) on delete cascade
 ) ENGINE=INNODB AUTO_INCREMENT=1;
+
+INSERT INTO `user` (`ID`, `type`, `name`, `contact`, `password`) VALUES (NULL, '0', 'admin', 'admin@gmail.com', 'adminpassword');
