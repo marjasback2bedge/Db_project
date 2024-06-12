@@ -93,3 +93,66 @@ create table itemlocate (
 ) ENGINE=INNODB AUTO_INCREMENT=1;
 
 INSERT INTO `user` (`ID`, `type`, `name`, `contact`, `password`) VALUES (NULL, '0', 'admin', 'admin@gmail.com', 'adminpassword');
+
+INSERT INTO user (ID, type, name, contact, password) VALUES 
+(NULL, '1', 'Alice', 'alice@example.com', 'password1'),
+(NULL, '1', 'Bob', 'bob@example.com', 'password2'),
+(NULL, '1', 'Charlie', 'charlie@example.com', 'password3'),
+(NULL, '1', 'David', 'david@example.com', 'password4'),
+(NULL, '1', 'Eve', 'eve@example.com', 'password5');
+
+/* 插入五个贴文 */
+INSERT INTO post (ID, type, userID, occurtime, posttime) VALUES 
+(NULL, '0', 1, '2024-01-01 10:00:00', CURRENT_TIMESTAMP),
+(NULL, '1', 2, '2024-01-02 11:00:00', CURRENT_TIMESTAMP),
+(NULL, '0', 3, '2024-01-03 12:00:00', CURRENT_TIMESTAMP),
+(NULL, '1', 4, '2024-01-04 13:00:00', CURRENT_TIMESTAMP),
+(NULL, '0', 5, '2024-01-05 14:00:00', CURRENT_TIMESTAMP);
+
+/* 插入五个物品 */
+INSERT INTO item (ID, postID, state, name, kind, description, photo) VALUES 
+(NULL, 1, '0', 'Wallet', 'Personal', 'Black leather wallet', NULL),
+(NULL, 2, '1', 'Phone', 'Electronics', 'White iPhone', NULL),
+(NULL, 3, '0', 'Laptop', 'Electronics', 'Silver MacBook', NULL),
+(NULL, 4, '1', 'Book', 'Stationery', 'Red notebook', NULL),
+(NULL, 5, '1', 'Watch', 'Accessory', 'Gold watch', NULL);
+
+/* 插入五个场所 */
+INSERT INTO department (ID, name, campus, building) VALUES 
+(NULL, 'Library', 'Main', 'Building A'),
+(NULL, 'Gym', 'West', 'Building B'),
+(NULL, 'Cafeteria', 'East', 'Building C'),
+(NULL, 'Dormitory', 'North', 'Building D'),
+(NULL, 'Office', 'South', 'Building E');
+
+/* 插入五个通知 */
+INSERT INTO note (ID, userID, content, time) VALUES 
+(NULL, 1, 'Your lost item has been found.', CURRENT_TIMESTAMP),
+(NULL, 2, 'You have a new message.', CURRENT_TIMESTAMP),
+(NULL, 3, 'Your account has been updated.', CURRENT_TIMESTAMP),
+(NULL, 4, 'Your post has a new response.', CURRENT_TIMESTAMP),
+(NULL, 5, 'Your password has been changed.', CURRENT_TIMESTAMP);
+
+/* 插入五个响应 */
+INSERT INTO response (time, userID, postID, content) VALUES 
+(CURRENT_TIMESTAMP, 1, 1, 'I found a similar item.'),
+(CURRENT_TIMESTAMP, 2, 2, 'I can help you with this.'),
+(CURRENT_TIMESTAMP, 3, 3, 'Can you provide more details?'),
+(CURRENT_TIMESTAMP, 4, 4, 'I have seen this item.'),
+(CURRENT_TIMESTAMP, 5, 5, 'Is this still available?');
+
+/* 插入五个贴文发生位置 */
+INSERT INTO postlocate (ID, postID, deptID) VALUES 
+(NULL, 1, 1),
+(NULL, 2, 2),
+(NULL, 3, 3),
+(NULL, 4, 4),
+(NULL, 5, 5);
+
+/* 插入五个物品当前地点 */
+INSERT INTO itemlocate (ID, itemID, deptID) VALUES 
+(NULL, 1, 1),
+(NULL, 2, 2),
+(NULL, 3, 3),
+(NULL, 4, 4),
+(NULL, 5, 5);
