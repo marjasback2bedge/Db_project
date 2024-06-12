@@ -36,7 +36,7 @@ if ($name && $passwd) {
             $_SESSION['login'] = TRUE;
             
                 // Redirect to a default page if the 'serial_no' parameter is not present
-                header("Location: success.php");
+                header("Location: user");
         }
 
     } else {
