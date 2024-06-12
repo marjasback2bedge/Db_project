@@ -81,7 +81,7 @@
                 echo "</td>";
 
 				echo "<td><a href='edit.php?ID={$row['ID']}'>編輯</a></td>";
-				echo "<td><a href='delete.php?ID={$row['ID']}'>刪除</a></td>";
+				echo "<td><a href='delete.php?ID={$row['ID']}&back=item'>刪除</a></td>";
 	
 				echo "</tr><br>";
 			}

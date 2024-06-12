@@ -9,7 +9,7 @@ if (isset($ID)) {
 	if ($conn->query($delete_sql) === TRUE) {
         $delete_sql = "DELETE FROM item WHERE ID = '$ID';";
         if ($conn->query($delete_sql) === TRUE){
-           	header('Location: index.php');
+           	header("Location: " . base_url . "admin/" . $_GET['back']);
 		    exit; 
         }
 

@@ -101,8 +101,6 @@ else{
 		</tr>
 	</thead>
 	<?php 
-		include '../../conn.php';
-
 		$i = 1;
 		$sqli = "SELECT *
 			FROM item
@@ -155,8 +153,50 @@ else{
                 echo "</td>";
 
 				echo "<td><a href='" . base_url . "admin/item/edit.php?ID={$rowi['ID']}'>編輯</a></td>";
-				echo "<td><a href='" . base_url . "admin/item/delete.php?ID={$rowi['ID']}'>刪除</a></td>";
+				echo "<td><a href='" . base_url . "admin/item/delete.php?ID={$rowi['ID']}&back=post'>刪除</a></td>";
 	
+				echo "</tr><br>";
+			}
+		} else {
+			echo "<tr><td colspan='6'>0 results</td></tr>";
+		}
+	?>
+</table>
+
+<!-- time datetime NOT NULL DEFAULT current_timestamp(),
+    userID BIGINT(30), /* foreign key用戶ID*/
+    postID BIGINT(30), /* foreign key貼文ID*/
+    content text, -->
+<table>
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>發布時間</th>
+			<th>發布用戶</th>
+			<th>內容</th>
+			<th></th>
+		</tr>
+	</thead>
+	<?php 
+		$i = 1;
+		$sqlr = "SELECT *
+			FROM response
+            WHERE postID = '$ID';";
+		$resultr = $conn->query($sqlr);
+
+		if ($resultr === false) {
+			die("error: " . $conn->error);
+		}
+        
+		if ($resultr->num_rows > 0) {
+			while ($rowr = $resultr->fetch_assoc()) {
+				echo "<tr>";
+				echo "<td>" . $i++ . "</td>";
+				echo "<td>" . date("Y-m-d H:i:s", strtotime( $rowr['time'])) . "</td>";
+				echo "<td>" . $rowr['userID'] . "</td>";
+				echo "<td>" . $rowr['content'] . "</td>";
+
+				echo "<td><a href='" . base_url . "admin/post/responsedelete.php?ID={$rowr['userID']}&time={$rowr['time']}'>刪除</a></td>";
 				echo "</tr><br>";
 			}
 		} else {
