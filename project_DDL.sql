@@ -67,9 +67,9 @@ create table response (
     postID BIGINT(30), /* foreign key貼文ID*/
     content text,
     primary key (time, userID),
-    foreign key (userID) references user(ID),
-    foreign key (postID) references post(ID) 
-		on delete set null
+    foreign key (userID) references user(ID) on delete cascade, 
+    foreign key (postID) references post(ID) on delete cascade
+        on delete set null
 ) ENGINE=INNODB;
 
 /* 貼文發生位置*/
