@@ -69,7 +69,6 @@ create table response (
     primary key (time, userID),
     foreign key (userID) references user(ID) on delete cascade, 
     foreign key (postID) references post(ID) on delete cascade
-        on delete set null
 ) ENGINE=INNODB;
 
 /* 貼文發生位置*/
