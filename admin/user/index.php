@@ -24,7 +24,7 @@ require_once('../inc/header.php')
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="<?= base_url ?>">
+            <a class="dropdown-item d-flex align-items-center" href="<?= base_url ?>logout.php">
               <i class="bi bi-box-arrow-right"></i>
               <span>登出</span>
             </a>
@@ -110,16 +110,12 @@ require_once('../inc/header.php')
   <main id="main" class="main">
 
     <div class="pagetitle" style="margin-bottom: 25px;">
-      <h1>用戶管理</h1>
+      <h1>用戶清單</h1>
       <hr>
     </div>
 
     <style>
-        #list td:nth-child(4){
-            text-align:end !important;
-        }
-        #list td:nth-child(5),
-        #list td:nth-child(6){
+        #list td:nth-child(5){
             text-align:center !important;
         }
     </style>

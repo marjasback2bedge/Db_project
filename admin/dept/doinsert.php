@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['insert'])) {
     }
     $row = $result->fetch_assoc();
     if($row['count'] > 0){
-        echo "Error: Duplicate values";
+        echo "Error: Duplicate values</br>";
         echo "<a href='../dept'>back</a>";
     }
     else{
