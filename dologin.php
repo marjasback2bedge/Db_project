@@ -24,7 +24,7 @@ if ($name && $passwd) {
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
         $_SESSION['name'] = $row['name'];
-        $_SESSION['user_id'] = $row['user_id'];
+        $_SESSION['user_id'] = $row['ID'];
         $_SESSION['type'] = $row['type'];
         $_SESSION['contact'] = $row['contact'];
 
