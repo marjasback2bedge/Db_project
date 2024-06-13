@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     } else {
         echo "Error: " . $conn->error;
-        echo "<a href='../user'>back</a>";
+        echo "<br><a href='../user'>back</a>";
     }
 
     $conn->close();
