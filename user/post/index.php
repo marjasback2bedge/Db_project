@@ -249,16 +249,16 @@ require_once('../inc/header.php')
 							<?php
 								include '../../conn.php';
                 $userID = $_SESSION['user_id'];
-								if (isset($_POST['lost_button'])){
-									$sql = "SELECT user.name, post.*
+								if (isset($_POST['found_button'])){
+                  $sql = "SELECT user.name, post.*
 										FROM post INNER JOIN user ON post.userID = user.ID
-										ORDER BY post.posttime ASC";              
+										WHERE post.ID = '$userID'
+										ORDER BY post.posttime ASC";            
                 }
                 else{
 									$sql = "SELECT user.name, post.*
 										FROM post INNER JOIN user ON post.userID = user.ID
-										WHERE post.ID = '$userID'
-										ORDER BY post.posttime ASC";
+										ORDER BY post.posttime ASC";  
                 }
 
 								$result = $conn->query($sql);
@@ -312,7 +312,7 @@ require_once('../inc/header.php')
 											echo "</td>";
 										}
 
-                    if ($row['ID'] != $userID){
+                    if ($row['userID'] != $userID){
 										  echo "<td><div class='oval-div' style='background-color: green;'><a style = 'color: white; text-decoration: none;' href='response.php?ID={$row['ID']}'>響應</a></div></td>"; 
                     }else{
                       echo "<td><div class='oval-div' style='background-color: brown;'><a style = 'color: white; text-decoration: none;' href='delete.php?ID={$row['ID']}'>刪除</a></div></td>";
